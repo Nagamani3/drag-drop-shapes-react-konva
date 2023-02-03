@@ -1,0 +1,29 @@
+.container{
+    position: absolute;
+    width:0px;
+    height:0px;
+    border-left: 37.3px solid transparent;
+    border-right: 37.7px solid transparent;
+    border-top: 65px solid #040404;
+    margin: 5px;
+    left: 20px;
+}
+
+.container:after{
+    position: relative;
+    top:8px;
+    left:-8px;
+    color:#DB5248;
+    font-size:40px;
+}
+
+.container:before{
+    content: "";
+    color: #DB5248;
+    position: relative;
+    top: -1.6px;
+    left: -35.9px;
+    border-left: 36px solid transparent;
+    border-right: 36.5px solid transparent;
+    border-top: 63px solid #efefef;
+}
