@@ -12,7 +12,7 @@ const Rectangle = ({
   onSelect,
   onChange,
   setShapeUpdate,
-  onClick
+  onClick,
 }) => {
   const shapeRef = React.useRef();
   const trRef = React.useRef();
@@ -37,7 +37,6 @@ const Rectangle = ({
     <React.Fragment>
       <Rect
         onClick={onSelect}
-     
         onTap={onSelect}
         ref={shapeRef}
         {...shapeProps}
@@ -100,6 +99,18 @@ const initialRectangles = [
     strokeWidth: 1,
     strokeScaleEnabled: false,
   },
+  {
+    type: "rectangle",
+    x: 90,
+    y: 50,
+    width: 60,
+    height: 60,
+    stroke: "black",
+    id: "rect2",
+    strokeWidth: 1,
+    strokeScaleEnabled: false,
+  },
+
 ];
 const initialCircles = [
   {
@@ -109,7 +120,7 @@ const initialCircles = [
     width: 60,
     height: 60,
     stroke: "black",
-    id: "rect2",
+    id: "circ2",
     strokeWidth: 1,
     strokeScaleEnabled: false,
   },
@@ -135,10 +146,9 @@ export default function Shapes({ setShapeUpdate, setCircleUpdate, setTri }) {
   const [data, setData] = React.useState(null);
   const [circle, setCircle] = React.useState(null);
   const [traing, setTriang] = React.useState(null);
-  let [shapes,setShapes]=useState([])
+  let [shapes, setShapes] = useState(0);
 
   const checkDeselect = (e) => {
-    
     // deselect when clicked on empty area
     const clickedOnEmpty = e.target === e.target.getStage();
     if (clickedOnEmpty && selectedId !== rectangles.id) {
@@ -147,8 +157,9 @@ export default function Shapes({ setShapeUpdate, setCircleUpdate, setTri }) {
   };
   useEffect(() => {
     setData(setShapeUpdate);
-    if(data){
-      setData(setShapeUpdate)
+    if (data) {
+      setData(setShapeUpdate);
+     
     }
   });
   useEffect(() => {
@@ -158,16 +169,12 @@ export default function Shapes({ setShapeUpdate, setCircleUpdate, setTri }) {
     setTriang(setTri);
   });
 
-  const handleClick = ()=>{
-setShapes([
-  ...shapes,
-  {
-    x: Math.random() * window.innerWidth,
-    y: Math.random() * window.innerHeight,
-  },
-])
-console.log("shapes",shapes)
-  }
+  const handleClick = () => {
+    setShapes(shapes + 1);
+    console.log("shapes", shapes);
+    setRectangles( rectangles +1);
+    console.log("recrcrrcrrc",rectangles)
+  };
   console.log("dhape update", data);
   return (
     <>
@@ -179,7 +186,6 @@ console.log("shapes",shapes)
         fill="#ffc107"
         style={{
           border: "1px solid black",
-      
         }}
       >
         {data ? (
@@ -193,8 +199,9 @@ console.log("shapes",shapes)
                   isSelected={rect.id === selectedId}
                   onSelect={() => {
                     selectShape(rect.id);
-                    console.log("rectangle only clicked");
-                    setData(true)
+                    console.log("rectangle only clicked");                    
+                    setRectangles(rectangles +1)
+                    console.log("rectctctcty")
                   }}
                   onChange={(newAttrs) => {
                     const rects = rectangles.slice();
@@ -208,7 +215,7 @@ console.log("shapes",shapes)
             })}
           </Layer>
         ) : null}
-        {circle  ? (
+        {circle ? (
           <Layer>
             {circles.map((circ, i) => {
               return (
